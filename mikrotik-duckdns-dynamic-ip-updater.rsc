@@ -1,13 +1,13 @@
-#---------------------------------------------------SCRIPT INFORMATION----------------------------------------------------
+#----------SCRIPT INFORMATION---------------------------------------------------
 #
 # Script:  Beeyev DuckDNS.org Dynamic DNS Update Script
-# Version: 1.0
+# Version: 1.1
 # Created: 29/07/2019
-# Updated: 29/07/2019
+# Updated: 03/08/2019
 # Author:  Alexander Tebiev
 # Website: https://github.com/beeyev
 #
-#----------------------------------------------MODIFY THIS SECTION AS NEEDED----------------------------------------------
+#----------MODIFY THIS SECTION AS NEEDED----------------------------------------
 
 
 # DuckDNS Sub Domain
@@ -21,7 +21,7 @@
 :local ipDetectService2 "https://v4.ident.me/"
 
 
-#-------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
 :local previousIP; :local currentIP
 # DuckDNS Full Domain (FQDN)
@@ -65,8 +65,12 @@
 
 	:local duckResponse
 	:do {:set duckResponse ([/tool fetch url=$duckRequestUrl output=user as-value]->"data")} on-error={
-		:log error "DuckDNS: could not send GET request to the DuckDNS server."
-		:error "DuckDNS: bye!"
+		:log error "DuckDNS: could not send GET request to the DuckDNS server. Going to try again in a while."
+		:delay 5m;
+			:do {:set duckResponse ([/tool fetch url=$duckRequestUrl output=user as-value]->"data")} on-error={
+				:log error "DuckDNS: could not send GET request to the DuckDNS server for the second time."
+				:error "DuckDNS: bye!"
+			}
 	}
 
 	# Checking server's answer
