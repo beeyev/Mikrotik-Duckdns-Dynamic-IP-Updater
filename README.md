@@ -20,7 +20,7 @@ WinBox: System -> Scheduler [Add]
 Name: `Duckdns-Dynamic-IP-Updater`  
 Start Time: `00:00:00`  
 Interval: `01:00:00`  
-On Event: `/system script run firmware-updater;`  
+On Event: `/system script run Duckdns-Dynamic-IP-Updater;`  
 Scheduler will run the script to update IP address every hour. If you want to make it more frequently, change the "Interval" parameter.
 
 ![](https://raw.githubusercontent.com/beeyev/Mikrotik-Duckdns-Dynamic-IP-Updater/master/howto/scheduler-task.png)
