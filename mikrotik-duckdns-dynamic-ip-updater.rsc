@@ -1,9 +1,9 @@
 #----------SCRIPT INFORMATION---------------------------------------------------
 #
 # Script:  Beeyev DuckDNS.org Dynamic DNS Update Script
-# Version: 1.1
+# Version: 1.2
 # Created: 29/07/2019
-# Updated: 03/08/2019
+# Updated: 06/06/2021
 # Author:  Alexander Tebiev
 # Website: https://github.com/beeyev
 #
@@ -16,9 +16,16 @@
 # DuckDNS Token
 :local duckdnsToken "PUT-TOKEN-HERE"
 
-# Online services which respond with your IP
+# Set true if you want to use IPv6
+:local ipv6mode false;
+
+# Online services which respond with your IPv4, two for redundancy
 :local ipDetectService1 "https://api.ipify.org/"
-:local ipDetectService2 "https://v4.ident.me/"
+:local ipDetectService2 "https://api4.my-ip.io/ip.txt"
+
+# Online services which respond with your IPv6, two for redundancy
+:local ipv6DetectService1 "https://api64.ipify.org"
+:local ipv6DetectService2 "https://api6.my-ip.io/ip.txt"
 
 
 #-------------------------------------------------------------------------------
@@ -28,6 +35,12 @@
 :local duckdnsFullDomain "$duckdnsSubDomain.duckdns.org"
 
 :log warning message="START: DuckDNS.org DDNS Update"
+
+if ($ipv6mode = true) do={
+	:set ipDetectService1 $ipv6DetectService1;
+	:set ipDetectService2 $ipv6DetectService2;
+	:log error "DuckDNS: ipv6 mode enabled"
+}
 
 # Resolve current DuckDNS subdomain ip address
 :do {:set previousIP [:resolve $duckdnsFullDomain]} on-error={ :log warning "DuckDNS: Could not resolve dns name $duckdnsFullDomain" };
@@ -41,19 +54,6 @@
 		};
 	};
 	
-	
-# Very simple checks that provided IP is correct
-:local dotPos0 0; :local dotPos1 0; :local dotCount 0
-:for i from=1 to=3 step=1 do={
-	:set dotPos1 [:find $currentIP "." $dotPos0];
-	:if ($dotPos1 > $dotPos0) do={ :set dotPos0 $dotPos1; :set dotCount ($dotCount+1)}
-}
-# Yes we just counted dots in IP address, at least it's better than nothing.
-:if ($dotCount < 3 or [:len $currentIP] < 7 or [:len $currentIP] > 15) do={
-	:log error "DuckDNS: provided public IP was not correct! Provided ip: $currentIP"
-	:error "DuckDNS: bye!"
-}
-
 
 :log info "DuckDNS: DNS IP ($previousIP), current internet IP ($currentIP)"
 

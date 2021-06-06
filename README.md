@@ -14,6 +14,8 @@ Using WinBox tool, go to: System -> Scripts [Add]
 Put [script source](https://raw.githubusercontent.com/beeyev/Mikrotik-Duckdns-Dynamic-IP-Updater/master/mikrotik-duckdns-dynamic-ip-updater.rsc) and set your **token** and **subdomain** into corresponding variables.
 ![](https://raw.githubusercontent.com/beeyev/Mikrotik-Duckdns-Dynamic-IP-Updater/master/howto/script-name-params.png)
 
+> If you want to use **IPv6**, change `ipv6mode` variable in the script  
+
 #### 3. Create scheduled task
 WinBox: System -> Scheduler [Add]  
   
