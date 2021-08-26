@@ -31,3 +31,5 @@ Or you can use this command to create the task:
 ```
 /system scheduler add name="Duckdns-Dynamic-IP-Updater" on-event="/system script run Duckdns-Dynamic-IP-Updater;" start-time=00:00:00 interval=01:00:00 comment="" disabled=no
 ```
+---
+If you love this project, please consider giving me a ⭐
