@@ -20,8 +20,8 @@ Put [script source](https://raw.githubusercontent.com/beeyev/Mikrotik-Duckdns-Dy
 WinBox: System -> Scheduler [Add]  
   
 Name: `Duckdns-Dynamic-IP-Updater`  
-Start Time: `00:00:00`  
-Interval: `01:00:00`  
+Start Time: `00:10:00`  
+Interval: `01:10:00`  
 On Event: `/system script run Duckdns-Dynamic-IP-Updater;`  
 Scheduler will run the script to update IP address every hour. If you want to make it more frequently, change the "Interval" parameter.
 
@@ -29,7 +29,7 @@ Scheduler will run the script to update IP address every hour. If you want to ma
 
 Or you can use this command to create the task:
 ```
-/system scheduler add name="Duckdns-Dynamic-IP-Updater" on-event="/system script run Duckdns-Dynamic-IP-Updater;" start-time=00:00:00 interval=01:00:00 comment="" disabled=no
+/system scheduler add name="Duckdns-Dynamic-IP-Updater" on-event="/system script run Duckdns-Dynamic-IP-Updater;" start-time=00:10:00 interval=01:10:00 comment="" disabled=no
 ```
 ---
 If you love this project, please consider giving me a ⭐
