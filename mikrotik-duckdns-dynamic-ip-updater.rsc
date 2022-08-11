@@ -1,14 +1,13 @@
 #----------SCRIPT INFORMATION---------------------------------------------------
 #
 # Script:  Beeyev DuckDNS.org Dynamic DNS Update Script
-# Version: 1.2
+# Version: 1.2.1
 # Created: 29/07/2019
-# Updated: 06/06/2021
+# Updated: 11/08/2022
 # Author:  Alexander Tebiev
 # Website: https://github.com/beeyev
 #
 #----------MODIFY THIS SECTION AS NEEDED----------------------------------------
-
 
 # DuckDNS Sub Domain
 :local duckdnsSubDomain "PUT-SUBDOMAIN-HERE"
@@ -19,14 +18,15 @@
 # Set true if you want to use IPv6
 :local ipv6mode false;
 
+#-------------------------------------------------------------------------------
+
 # Online services which respond with your IPv4, two for redundancy
 :local ipDetectService1 "https://api.ipify.org/"
-:local ipDetectService2 "https://api4.my-ip.io/ip.txt"
+:local ipDetectService2 "https://ipv4.icanhazip.com/"
 
 # Online services which respond with your IPv6, two for redundancy
-:local ipv6DetectService1 "https://api64.ipify.org"
-:local ipv6DetectService2 "https://api6.my-ip.io/ip.txt"
-
+:local ipv6DetectService1 "https://api64.ipify.org/"
+:local ipv6DetectService2 "https://ipv6.icanhazip.com/"
 
 #-------------------------------------------------------------------------------
 
